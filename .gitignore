@@ -33,7 +33,7 @@ _site/
 
 # Additional Ruby/bundler ignore for when you run: bundle install
 /vendor
-/dist
+dist
 /node-basics
 # Specific ignore for GitHub Pages
 # GitHub Pages will always use its own deployed version of pages-gem 
