@@ -50,8 +50,8 @@ const projects = [
     {projects.map((project, index) => (
       <div class="group relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class={`lg:col-span-7 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-          <div class="relative rounded-lg overflow-hidden border border-console-border bg-console-card p-8 hover:border-accent-primary/50 transition-colors duration-300">
-            <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl font-bold select-none">
+          <div class="relative rounded-lg overflow-hidden border border-console-border bg-console-card p-6 md:p-8 hover:border-accent-primary/50 transition-colors duration-300">
+            <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl md:text-9xl font-bold select-none">
               {index + 1}
             </div>
             

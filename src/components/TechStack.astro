@@ -1,10 +1,35 @@
 ---
 const stack = {
-  "Cloud & IaC": ["AWS (EKS, Private CA, TGW)", "Terraform Cloud", "AWS CDK (Go)", "Google Cloud APIs"],
-  "Containerization": ["Kubernetes (EKS, GKE)", "Docker", "Helm", "Ingress-Nginx"],
-  "CI/CD & GitOps": ["ArgoCD", "Flux", "GitHub Actions", "CircleCI", "Jenkins", "AWS CodePipeline"],
-  "Observability": ["Prometheus", "Grafana", "Loki", "ELK Stack", "OpenTelemetry"],
-  "Scripting & Backend": ["Go", "Node.js", "Bash", "Python"]
+  "Cloud & IaC": [
+    { name: "AWS", url: "https://aws.amazon.com" },
+    { name: "Terraform", url: "https://www.terraform.io" },
+    { name: "AWS CDK", url: "https://aws.amazon.com/cdk/" },
+    { name: "Google Cloud", url: "https://cloud.google.com" }
+  ],
+  "Containerization": [
+    { name: "Kubernetes", url: "https://kubernetes.io" },
+    { name: "Docker", url: "https://www.docker.com" },
+    { name: "Helm", url: "https://helm.sh" },
+    { name: "Ingress-Nginx", url: "https://github.com/kubernetes/ingress-nginx" }
+  ],
+  "CI/CD & GitOps": [
+    { name: "ArgoCD", url: "https://argo-cd.readthedocs.io" },
+    { name: "Flux", url: "https://fluxcd.io" },
+    { name: "GitHub Actions", url: "https://github.com/features/actions" },
+    { name: "Jenkins", url: "https://www.jenkins.io" }
+  ],
+  "Observability": [
+    { name: "Prometheus", url: "https://prometheus.io" },
+    { name: "Grafana", url: "https://grafana.com" },
+    { name: "ELK Stack", url: "https://www.elastic.co/elastic-stack" },
+    { name: "OpenTelemetry", url: "https://opentelemetry.io" }
+  ],
+  "Scripting & Backend": [
+    { name: "Go", url: "https://go.dev" },
+    { name: "Node.js", url: "https://nodejs.org" },
+    { name: "Bash", url: "https://www.gnu.org/software/bash/" },
+    { name: "Python", url: "https://www.python.org" }
+  ]
 };
 ---
 
@@ -17,19 +42,19 @@ const stack = {
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     {Object.entries(stack).map(([category, tools]) => (
-      <div class="border border-console-border rounded-lg p-6 bg-console-card/50 backdrop-blur-sm">
+      <div class="border border-console-border rounded-lg p-6 bg-console-card/50 backdrop-blur-sm hover:border-accent-secondary/50 transition-colors duration-300">
         <h3 class="text-lg font-mono text-accent-secondary mb-6 border-b border-console-border pb-2">
           ./{category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}
         </h3>
         <div class="flex flex-wrap gap-3">
           {tools.map(tool => (
-            <div class="group relative">
+            <a href={tool.url} target="_blank" rel="noopener noreferrer" class="group relative">
               <div class="absolute -inset-0.5 bg-gradient-to-r from-accent-primary to-accent-secondary rounded opacity-0 group-hover:opacity-75 blur transition duration-200"></div>
               <div class="relative px-4 py-2 bg-console-bg rounded border border-console-border flex items-center gap-2 hover:border-transparent transition-colors">
-                <span class="w-2 h-2 rounded-full bg-accent-success"></span>
-                <span class="text-sm font-medium">{tool}</span>
+                <span class="w-2 h-2 rounded-full bg-accent-success group-hover:animate-pulse"></span>
+                <span class="text-sm font-medium text-console-text group-hover:text-white transition-colors">{tool.name}</span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
