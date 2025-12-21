@@ -1,9 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
-	pre,
-	code {
-		font-size: 0.875rem;
-	}
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .console-card {
+    @apply bg-console-card border border-console-border rounded-lg p-6 hover:border-accent-primary/50 transition-colors duration-300;
+  }
+  
+  .console-header {
+    @apply font-mono text-sm text-console-muted mb-2 flex items-center gap-2;
+  }
+
+  .status-dot {
+    @apply w-2 h-2 rounded-full;
+  }
+  
+  .status-dot.active {
+    @apply bg-accent-success shadow-[0_0_8px_rgba(0,255,157,0.5)];
+  }
 }

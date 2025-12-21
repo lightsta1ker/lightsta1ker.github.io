@@ -1,0 +1,54 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "DevOps Engineer & Platform Architect Portfolio" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <ViewTransitions />
+  </head>
+  <body class="bg-console-bg text-console-text font-sans min-h-screen selection:bg-accent-primary selection:text-black">
+    <div class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-primary via-accent-secondary to-accent-success z-50"></div>
+    
+    <nav class="border-b border-console-border bg-console-bg/80 backdrop-blur-md sticky top-0 z-40">
+      <div class="container mx-auto px-4 h-14 flex items-center justify-between">
+        <div class="font-mono text-accent-primary font-bold text-lg">
+          ~/devops/portfolio
+        </div>
+        <div class="flex gap-6 text-sm font-medium text-console-muted">
+          <a href="#systems" class="hover:text-accent-primary transition-colors">./systems</a>
+          <a href="#stack" class="hover:text-accent-primary transition-colors">./stack</a>
+          <a href="#projects" class="hover:text-accent-primary transition-colors">./projects</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8">
+      <slot />
+    </main>
+
+    <footer class="border-t border-console-border mt-20 py-8 text-center text-console-muted text-sm font-mono">
+      <p>echo "Built with Astro & Tailwind" > footer.log</p>
+    </footer>
+  </body>
+</html>

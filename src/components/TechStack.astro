@@ -1,0 +1,38 @@
+---
+const stack = {
+  "Cloud & IaC": ["AWS (EKS, Private CA, TGW)", "Terraform Cloud", "AWS CDK (Go)", "Google Cloud APIs"],
+  "Containerization": ["Kubernetes (EKS, GKE)", "Docker", "Helm", "Ingress-Nginx"],
+  "CI/CD & GitOps": ["ArgoCD", "Flux", "GitHub Actions", "CircleCI", "Jenkins", "AWS CodePipeline"],
+  "Observability": ["Prometheus", "Grafana", "Loki", "ELK Stack", "OpenTelemetry"],
+  "Scripting & Backend": ["Go", "Node.js", "Bash", "Python"]
+};
+---
+
+<section id="stack" class="py-20">
+  <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+    <span class="text-accent-primary">02.</span> 
+    Infrastructure Topology
+    <span class="h-px bg-console-border flex-1 ml-4"></span>
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {Object.entries(stack).map(([category, tools]) => (
+      <div class="border border-console-border rounded-lg p-6 bg-console-card/50 backdrop-blur-sm">
+        <h3 class="text-lg font-mono text-accent-secondary mb-6 border-b border-console-border pb-2">
+          ./{category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}
+        </h3>
+        <div class="flex flex-wrap gap-3">
+          {tools.map(tool => (
+            <div class="group relative">
+              <div class="absolute -inset-0.5 bg-gradient-to-r from-accent-primary to-accent-secondary rounded opacity-0 group-hover:opacity-75 blur transition duration-200"></div>
+              <div class="relative px-4 py-2 bg-console-bg rounded border border-console-border flex items-center gap-2 hover:border-transparent transition-colors">
+                <span class="w-2 h-2 rounded-full bg-accent-success"></span>
+                <span class="text-sm font-medium">{tool}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

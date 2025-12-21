@@ -1,0 +1,20 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<div class:list={["bg-console-card border border-console-border rounded-lg overflow-hidden font-mono text-sm shadow-2xl", className]} id={id}>
+  <div class="bg-console-border/50 px-4 py-2 flex items-center gap-2 border-b border-console-border">
+    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+    <div class="ml-2 text-xs text-console-muted">user@devops-station: ~</div>
+  </div>
+  <div class="p-4 text-console-text space-y-2">
+    <slot />
+  </div>
+</div>

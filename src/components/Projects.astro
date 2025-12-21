@@ -1,0 +1,118 @@
+---
+const projects = [
+  {
+    title: "Zero-Trust mTLS Architecture",
+    role: "Lead DevOps Engineer",
+    description: "Engineered a secure Vehicle-2-Grid (V2G) communication architecture for Toyota Connected. Utilized AWS Private CA and Transit Gateway to secure inter-VPC traffic across multiple accounts. Implemented double TLS with NGINX for path-based routing and internal mTLS enforcement.",
+    tech: ["AWS Private CA", "Transit Gateway", "NGINX", "mTLS", "Terraform"],
+    metrics: [
+      { label: "Security", value: "Zero Trust" },
+      { label: "Encryption", value: "Double TLS" },
+      { label: "Scope", value: "Multi-Account" }
+    ],
+    link: "#"
+  },
+  {
+    title: "IoT Platform Modernization",
+    role: "Infrastructure Architect",
+    description: "Designed and implemented an EKS-based infrastructure for Chennai Metro (UDS) to modernize a legacy IoT platform. Integrated EMQX MQTT broker, RDS, and RabbitMQ for real-time sensor data ingestion. Built end-to-end CI/CD pipelines with AWS CodePipeline and ArgoCD.",
+    tech: ["EKS", "EMQX", "RabbitMQ", "ArgoCD", "CodePipeline"],
+    metrics: [
+      { label: "Scale", value: "Real-time" },
+      { label: "Deployment", value: "Automated" },
+      { label: "Platform", value: "K8s" }
+    ],
+    link: "#"
+  },
+  {
+    title: "FinTech DR & Security",
+    role: "Associate DevOps Engineer",
+    description: "Developed a comprehensive Disaster Recovery strategy for Tazapay's microservices platform. Fortified security with WAF rules to neutralize DDoS attacks. Migrated MongoDB Atlas clusters to self-hosted VPNs and implemented semantic versioning for CI/CD pipelines.",
+    tech: ["WAF", "MongoDB", "VPN", "OpenTelemetry", "Sumo Logic"],
+    metrics: [
+      { label: "Uptime", value: "99.99%" },
+      { label: "Compliance", value: "PCI-DSS" },
+      { label: "Recovery", value: "Minimized" }
+    ],
+    link: "#"
+  }
+];
+---
+
+<section id="projects" class="py-20">
+  <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+    <span class="text-accent-primary">03.</span> 
+    Production Systems
+    <span class="h-px bg-console-border flex-1 ml-4"></span>
+  </h2>
+
+  <div class="space-y-12">
+    {projects.map((project, index) => (
+      <div class="group relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class={`lg:col-span-7 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+          <div class="relative rounded-lg overflow-hidden border border-console-border bg-console-card p-8 hover:border-accent-primary/50 transition-colors duration-300">
+            <div class="absolute top-0 right-0 p-4 opacity-10 text-9xl font-bold select-none">
+              {index + 1}
+            </div>
+            
+            <div class="relative z-10">
+              <div class="flex items-center gap-4 mb-6">
+                <h3 class="text-2xl font-bold text-white">{project.title}</h3>
+                <span class="px-3 py-1 rounded-full bg-accent-secondary/10 text-accent-secondary text-xs font-mono border border-accent-secondary/20">
+                  {project.role}
+                </span>
+              </div>
+              
+              <p class="text-console-muted mb-8 leading-relaxed max-w-2xl">
+                {project.description}
+              </p>
+
+              <div class="grid grid-cols-3 gap-4 mb-8">
+                {project.metrics.map(metric => (
+                  <div class="bg-console-bg/50 p-3 rounded border border-console-border">
+                    <div class="text-accent-success font-mono font-bold text-lg">{metric.value}</div>
+                    <div class="text-console-muted text-xs uppercase tracking-wider">{metric.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div class="flex flex-wrap gap-3">
+                {project.tech.map(t => (
+                  <span class="text-sm font-mono text-accent-primary">#{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class={`lg:col-span-5 ${index % 2 === 1 ? 'lg:order-1' : ''} relative`}>
+          <div class="absolute inset-0 bg-gradient-to-r from-accent-primary/20 to-accent-secondary/20 blur-3xl opacity-20"></div>
+          <div class="relative border border-console-border bg-console-bg/80 backdrop-blur p-6 rounded-lg font-mono text-xs text-console-muted">
+            <div class="flex gap-2 mb-4 border-b border-console-border pb-2">
+              <span class="text-accent-primary">infrastructure.tf</span>
+            </div>
+            <pre class="overflow-x-auto">
+resource "aws_eks_cluster" "main" &#123;
+  name     = "{project.title.toLowerCase().split(' ').slice(0, 1).join('-')}-cluster"
+  role_arn = aws_iam_role.eks.arn
+
+  vpc_config &#123;
+    subnet_ids = module.vpc.private_subnets
+    endpoint_private_access = <span class="text-accent-warning">true</span>
+    endpoint_public_access  = <span class="text-accent-warning">false</span>
+  &#125;
+
+  encryption_config &#123;
+    provider &#123;
+      key_arn = aws_kms_key.eks.arn
+    &#125;
+    resources = ["secrets"]
+  &#125;
+&#125;
+            </pre>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

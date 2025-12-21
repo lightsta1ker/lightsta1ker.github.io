@@ -1,0 +1,49 @@
+---
+const systems = [
+  {
+    title: "Secure Mesh Architecture",
+    description: "Designed a Zero-Trust mTLS architecture for Vehicle-2-Grid communication. Implemented double TLS with NGINX and AWS Private CA to secure inter-VPC traffic across multiple accounts.",
+    icon: "🔒",
+    stats: ["Zero Trust", "mTLS", "Multi-Account"]
+  },
+  {
+    title: "IoT Data Pipelines",
+    description: "Modernized legacy IoT infrastructure using EKS, EMQX, and RabbitMQ. Built scalable pipelines to handle real-time sensor data ingestion and processing for metro rail systems.",
+    icon: "📡",
+    stats: ["Real-time", "High Throughput", "Scalable"]
+  },
+  {
+    title: "Resilient FinTech Infra",
+    description: "Fortified payment platforms with WAF rules and comprehensive Disaster Recovery strategies. Ensured PCI-DSS compliance and 99.99% uptime for critical financial transactions.",
+    icon: "💳",
+    stats: ["99.99% Uptime", "PCI-DSS", "DDoS Protection"]
+  }
+];
+---
+
+<section id="systems" class="py-20">
+  <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+    <span class="text-accent-primary">01.</span> 
+    Systems I Build & Operate
+    <span class="h-px bg-console-border flex-1 ml-4"></span>
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    {systems.map(system => (
+      <div class="console-card group hover:-translate-y-1 transition-transform duration-300">
+        <div class="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{system.icon}</div>
+        <h3 class="text-xl font-bold mb-3 text-white group-hover:text-accent-primary transition-colors">{system.title}</h3>
+        <p class="text-console-muted text-sm mb-6 leading-relaxed">
+          {system.description}
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {system.stats.map(stat => (
+            <span class="text-xs font-mono px-2 py-1 rounded bg-console-border/50 text-accent-success border border-console-border">
+              {stat}
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

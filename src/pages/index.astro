@@ -1,47 +1,16 @@
 ---
-import { SITE_TITLE, SITE_TAGLINE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { Image } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import Ava from '@src/assets/img/ava.jpg';
-import Prose from '../components/Prose.astro';
-import PostItem from '../components/PostItem.astro';
-
-type BlogPost = CollectionEntry<'blog'>;
-
-const posts = (await getCollection('blog')).sort((a: BlogPost, b: BlogPost) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 5);
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import Systems from '../components/Systems.astro';
+import TechStack from '../components/TechStack.astro';
+import Projects from '../components/Projects.astro';
+import Experience from '../components/Experience.astro';
 ---
 
-<BaseLayout title={SITE_TITLE + ' - ' + SITE_TAGLINE} description={SITE_DESCRIPTION}>
-	<div class='container'>
-		<div class='w-full md:flex md:items-center gap-16 mb-10'>
-      <div class="text-pretty leading-9">
-        <h1 class="text-4xl font-bold mb-4">Hi There 👋, Arun Here! </h1>
-        <Prose>
-          <div class="text-lg">
-            <p>I am a DevOps Engineer from Chennai, India. I love sharing what i know on <a href="https://lightsta1ker.github.io" target="_blank">lightsta1ker.github.io</a>. I'm also active on <a href="https://dev.to/lightsta1ker" target="_blank">dev.to</a> and <a href="https://x.com/lightsta1ker" target="_blank">twitter</a>.</p>
-          </div>
-        </Prose>
-      </div>
-      <Image src={Ava} alt="Muhammad Arunurohman" width={300} loading="eager" class="rounded-3xl rotate-3 mx-4 md:mx-0"/>
-		</div>
-		<main>
-      <div class='mt-6 mb-12'>
-        <div class="flex justify-between gap-2 border-b mb-1 dark:border-b-zinc-700">
-          <h2 class="text-lg font-bold mb-3">Recent Posts</h2>
-          <a href="/posts/" class="inline-block py-2 underline text-zinc-950">All posts &raquo;</a>
-        </div>
-        <div>
-          {
-            posts.map((post: BlogPost) => (
-              <PostItem post={post} />
-            ))
-          }      
-        </div>
-        <div class="text-right">
-        </div>
-      </div>
-		</main>
-	</div>
-</BaseLayout>
+<MainLayout title="Arun | Platform Architect & DevOps Engineer">
+  <Hero />
+  <Systems />
+  <TechStack />
+  <Projects />
+  <Experience />
+</MainLayout>
