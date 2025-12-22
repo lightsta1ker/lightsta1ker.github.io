@@ -1,24 +1,9 @@
 ---
-const systems = [
-  {
-    title: "Secure Mesh Architecture",
-    description: "Designed a Zero-Trust mTLS architecture for Vehicle-2-Grid communication. Implemented double TLS with NGINX and AWS Private CA to secure inter-VPC traffic across multiple accounts.",
-    icon: "🔒",
-    stats: ["Zero Trust", "mTLS", "Multi-Account"]
-  },
-  {
-    title: "IoT Data Pipelines",
-    description: "Modernized legacy IoT infrastructure using EKS, EMQX, and RabbitMQ. Built scalable pipelines to handle real-time sensor data ingestion and processing for metro rail systems.",
-    icon: "📡",
-    stats: ["Real-time", "High Throughput", "Scalable"]
-  },
-  {
-    title: "Resilient FinTech Infra",
-    description: "Fortified payment platforms with WAF rules and comprehensive Disaster Recovery strategies. Ensured PCI-DSS compliance and 99.99% uptime for critical financial transactions.",
-    icon: "💳",
-    stats: ["99.99% Uptime", "PCI-DSS", "DDoS Protection"]
-  }
-];
+import { getCollection } from 'astro:content';
+
+const systems = await getCollection('systems');
+// Sort by date or custom order if needed
+systems.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 
 <section id="systems" class="py-20">
@@ -30,22 +15,22 @@ const systems = [
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {systems.map((system, index) => (
-      <div class="console-card group hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,240,255,0.1)]" style={`animation-delay: ${index * 200}ms`}>
+      <a href={`/systems/${system.slug}`} class="block console-card group hover:-translate-y-2 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,240,255,0.1)]" style={`animation-delay: ${index * 200}ms`}>
         <div class="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300 bg-console-bg w-16 h-16 flex items-center justify-center rounded-lg border border-console-border group-hover:border-accent-primary/50">
-          {system.icon}
+          {system.data.icon}
         </div>
-        <h3 class="text-xl font-bold mb-3 text-white group-hover:text-accent-primary transition-colors">{system.title}</h3>
-        <p class="text-console-muted text-sm mb-6 leading-relaxed">
-          {system.description}
+        <h3 class="text-xl font-bold mb-3 text-white group-hover:text-accent-primary transition-colors">{system.data.title}</h3>
+        <p class="text-console-muted text-sm mb-6 leading-relaxed line-clamp-3">
+          {system.data.description}
         </p>
         <div class="flex flex-wrap gap-2">
-          {system.stats.map(stat => (
+          {system.data.stats.map(stat => (
             <span class="text-xs font-mono px-2 py-1 rounded bg-console-border/50 text-accent-success border border-console-border group-hover:border-accent-primary/30 transition-colors">
               {stat}
             </span>
           ))}
         </div>
-      </div>
+      </a>
     ))}
   </div>
 </section>

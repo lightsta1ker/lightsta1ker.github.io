@@ -1,0 +1,51 @@
+---
+import MainLayout from './MainLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+}
+
+const { title, description, publishDate } = Astro.props;
+---
+
+<MainLayout title={`${title} | Arunachalam Thangappa`} description={description}>
+  <article class="max-w-3xl mx-auto py-20 px-4">
+    <div class="mb-12 border-b border-console-border pb-8">
+      <a href="/#systems" class="inline-flex items-center gap-2 text-console-muted hover:text-accent-primary transition-colors mb-8 font-mono text-sm">
+        <span class="text-accent-secondary">cd</span> ..
+      </a>
+      
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight">{title}</h1>
+      
+      <div class="flex flex-wrap items-center gap-6 text-sm font-mono text-console-muted">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-accent-success"></span>
+          <span>{publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-accent-primary">author:</span> arun
+        </div>
+      </div>
+    </div>
+
+    <div class="prose prose-invert prose-code:font-mono prose-headings:font-bold prose-h2:text-accent-primary prose-a:text-accent-secondary hover:prose-a:text-accent-primary max-w-none">
+      <slot />
+    </div>
+
+    <div class="mt-20 pt-8 border-t border-console-border">
+      <div class="bg-console-card border border-console-border rounded-lg p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <h3 class="text-lg font-bold text-white mb-1">Want to build something similar?</h3>
+          <p class="text-console-muted text-sm">Let's discuss how we can engineer this for your scale.</p>
+        </div>
+        <a href="/#contact" class="px-6 py-3 bg-accent-primary text-black font-bold rounded hover:bg-accent-primary/90 transition-colors whitespace-nowrap">
+          Initialize Handshake
+        </a>
+      </div>
+    </div>
+  </article>
+
+
+</MainLayout>

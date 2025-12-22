@@ -2,8 +2,8 @@
 import Terminal from './Terminal.astro';
 ---
 
-<section class="min-h-[80vh] flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 py-12 lg:py-20">
-  <div class="flex-1 space-y-6 text-center lg:text-left order-2 lg:order-1">
+<section class="min-h-[60vh] flex flex-col items-center justify-center py-20 text-center">
+  <div class="space-y-8 max-w-4xl mx-auto">
     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-primary/10 border border-accent-primary/20 text-accent-primary text-xs font-mono">
       <span class="relative flex h-2 w-2">
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-primary opacity-75"></span>
@@ -12,67 +12,24 @@ import Terminal from './Terminal.astro';
       System Operational
     </div>
     
-    <h1 class="text-4xl lg:text-7xl font-bold tracking-tight">
+    <h1 class="text-5xl lg:text-8xl font-bold tracking-tight">
       Arunachalam <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-primary to-accent-secondary">Thangappa</span>
     </h1>
-    <h2 class="text-xl lg:text-3xl font-mono text-console-text">
+    <h2 class="text-2xl lg:text-4xl font-mono text-console-text">
       DevOps & Infrastructure Engineer
     </h2>
     
-    <p class="text-lg lg:text-xl text-console-muted max-w-2xl leading-relaxed mx-auto lg:mx-0">
+    <p class="text-xl text-console-muted max-w-2xl leading-relaxed mx-auto">
       Designing secure, scalable cloud architectures on AWS. Expert in Kubernetes, Terraform, mTLS implementation, and GitOps workflows. Modernizing legacy infrastructure for fintech and IoT sectors.
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center lg:justify-start">
-      <a href="#projects" class="px-6 py-3 bg-accent-primary text-black font-bold rounded hover:bg-accent-primary/90 transition-colors">
+    <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
+      <a href="#projects" class="px-8 py-4 bg-accent-primary text-black font-bold rounded hover:bg-accent-primary/90 transition-colors">
         View Systems
       </a>
-      <a href="https://github.com/lightsta1ker" target="_blank" class="px-6 py-3 border border-console-border hover:border-accent-primary text-console-text rounded transition-colors">
+      <a href="https://github.com/lightsta1ker" target="_blank" class="px-8 py-4 border border-console-border hover:border-accent-primary text-console-text rounded transition-colors">
         GitHub Profile
       </a>
     </div>
-  </div>
-
-  <div class="flex-1 w-full max-w-xl order-1 lg:order-2">
-    <Terminal class="animate-float">
-      <div class="flex gap-2">
-        <span class="text-accent-success">➜</span>
-        <span class="text-accent-primary">~</span>
-        <span>neofetch</span>
-      </div>
-      <div class="grid grid-cols-[80px_1fr] sm:grid-cols-[120px_1fr] gap-4 mt-4">
-        <div class="text-accent-primary select-none text-[10px] sm:text-base">
-          <pre>
-      /\
-     /  \
-    /    \
-   /      \
-  /________\
-          </pre>
-        </div>
-        <div class="space-y-1 text-xs sm:text-sm">
-          <div><span class="text-accent-primary">Host</span>: Production-Grade-EKS</div>
-          <div><span class="text-accent-primary">Uptime</span>: 4+ Years</div>
-          <div><span class="text-accent-primary">Role</span>: DevOps Engineer</div>
-          <div><span class="text-accent-primary">Shell</span>: zsh 5.9</div>
-          <div><span class="text-accent-primary">Focus</span>: Security, Scale, GitOps</div>
-          <div><span class="text-accent-primary">Location</span>: Chennai, India</div>
-          <div class="flex gap-2 mt-2">
-            <span class="w-3 h-3 bg-black"></span>
-            <span class="w-3 h-3 bg-red-500"></span>
-            <span class="w-3 h-3 bg-green-500"></span>
-            <span class="w-3 h-3 bg-yellow-500"></span>
-            <span class="w-3 h-3 bg-blue-500"></span>
-            <span class="w-3 h-3 bg-purple-500"></span>
-            <span class="w-3 h-3 bg-cyan-500"></span>
-          </div>
-        </div>
-      </div>
-      <div class="flex gap-2 mt-2 animate-pulse">
-        <span class="text-accent-success">➜</span>
-        <span class="text-accent-primary">~</span>
-        <span class="w-2 h-5 bg-console-muted block"></span>
-      </div>
-    </Terminal>
   </div>
 </section>

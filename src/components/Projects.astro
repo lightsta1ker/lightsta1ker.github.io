@@ -20,7 +20,7 @@ const projects = [
     metrics: [
       { label: "Scale", value: "Real-time" },
       { label: "Deployment", value: "Automated" },
-      { label: "Platform", value: "K8s" }
+      { label: "Platform", value: "K8S" }
     ],
     link: "#"
   },
@@ -42,58 +42,63 @@ const projects = [
 <section id="projects" class="py-20">
   <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
     <span class="text-accent-primary">03.</span> 
-    Production Systems
+    Change Requests
     <span class="h-px bg-console-border flex-1 ml-4"></span>
   </h2>
 
-  <div class="space-y-12">
-    {projects.map((project, index) => (
-      <div class="group relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class={`lg:col-span-7 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+    <div class="lg:col-span-7 space-y-12">
+      {projects.map((project, index) => (
+        <div class="group relative">
           <div class="relative rounded-lg overflow-hidden border border-console-border bg-console-card p-6 md:p-8 hover:border-accent-primary/50 transition-colors duration-300">
             <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl md:text-9xl font-bold select-none">
-              {index + 1}
+              PR#{index + 124}
             </div>
             
             <div class="relative z-10">
               <div class="flex items-center gap-4 mb-6">
+                <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-accent-success/10 border border-accent-success/20 text-accent-success text-xs font-mono">
+                  <span class="w-2 h-2 rounded-full bg-accent-success"></span>
+                  MERGED
+                </div>
                 <h3 class="text-2xl font-bold text-white">{project.title}</h3>
-                <span class="px-3 py-1 rounded-full bg-accent-secondary/10 text-accent-secondary text-xs font-mono border border-accent-secondary/20">
-                  {project.role}
-                </span>
               </div>
               
-              <p class="text-console-muted mb-8 leading-relaxed max-w-2xl">
-                {project.description}
+              <p class="text-console-muted mb-8 leading-relaxed max-w-2xl font-mono text-sm border-l-2 border-console-border pl-4">
+                <span class="text-accent-primary">git commit -m</span> "{project.description}"
               </p>
 
               <div class="grid grid-cols-3 gap-4 mb-8">
                 {project.metrics.map(metric => (
                   <div class="bg-console-bg/50 p-3 rounded border border-console-border">
                     <div class="text-accent-success font-mono font-bold text-lg">{metric.value}</div>
-                    <div class="text-console-muted text-xs uppercase tracking-wider">{metric.label}</div>
+                    <div class="text-console-muted text-[10px] uppercase tracking-wider">{metric.label}</div>
                   </div>
                 ))}
               </div>
 
               <div class="flex flex-wrap gap-3">
                 {project.tech.map(t => (
-                  <span class="text-sm font-mono text-accent-primary">#{t}</span>
+                  <span class="text-xs font-mono text-accent-primary bg-accent-primary/10 px-2 py-1 rounded">#{t}</span>
                 ))}
               </div>
             </div>
           </div>
         </div>
-        
-        <div class={`lg:col-span-5 ${index % 2 === 1 ? 'lg:order-1' : ''} relative`}>
-          <div class="absolute inset-0 bg-gradient-to-r from-accent-primary/20 to-accent-secondary/20 blur-3xl opacity-20"></div>
-          <div class="relative border border-console-border bg-console-bg/80 backdrop-blur p-6 rounded-lg font-mono text-xs text-console-muted">
-            <div class="flex gap-2 mb-4 border-b border-console-border pb-2">
-              <span class="text-accent-primary">infrastructure.tf</span>
-            </div>
-            <pre class="overflow-x-auto">
+      ))}
+    </div>
+    
+    <div class="hidden lg:block lg:col-span-5 sticky top-24">
+      <div class="relative">
+        <div class="absolute inset-0 bg-gradient-to-r from-accent-primary/20 to-accent-secondary/20 blur-3xl opacity-20"></div>
+        <div class="relative border border-console-border bg-console-bg/80 backdrop-blur p-6 rounded-lg font-mono text-xs text-console-muted shadow-2xl">
+          <div class="flex gap-2 mb-4 border-b border-console-border pb-2 justify-between items-center">
+            <span class="text-accent-primary">infrastructure.tf</span>
+            <span class="text-[10px] text-console-muted">Diff: +488 -12</span>
+          </div>
+          <pre class="overflow-x-auto">
 resource "aws_eks_cluster" "main" &#123;
-  name     = "{project.title.toLowerCase().split(' ').slice(0, 1).join('-')}-cluster"
+  name     = "production-cluster"
   role_arn = aws_iam_role.eks.arn
 
   vpc_config &#123;
@@ -102,17 +107,41 @@ resource "aws_eks_cluster" "main" &#123;
     endpoint_public_access  = <span class="text-accent-warning">false</span>
   &#125;
 
+  # Zero-Trust Security Group
+  security_group_ids = [aws_security_group.mtls_enforced.id]
+
   encryption_config &#123;
     provider &#123;
       key_arn = aws_kms_key.eks.arn
     &#125;
     resources = ["secrets"]
   &#125;
+
+  # GitOps Bootstrap
+  tags = &#123;
+    Environment = "Production"
+    ManagedBy   = "Terraform"
+    GitOps      = "ArgoCD"
+  &#125;
 &#125;
-            </pre>
-          </div>
+
+resource "aws_service_mesh" "v2g" &#123;
+  name = "vehicle-grid-mesh"
+  spec &#123;
+    provider &#123;
+      virtual_node &#123;
+        pod_selector &#123;
+          match_labels = &#123;
+            app = "payment-gateway"
+          &#125;
+        &#125;
+      &#125;
+    &#125;
+  &#125;
+&#125;
+          </pre>
         </div>
       </div>
-    ))}
+    </div>
   </div>
 </section>

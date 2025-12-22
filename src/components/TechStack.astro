@@ -1,63 +1,186 @@
 ---
 const stack = {
   "Cloud & IaC": [
-    { name: "AWS", url: "https://aws.amazon.com" },
-    { name: "Terraform", url: "https://www.terraform.io" },
-    { name: "AWS CDK", url: "https://aws.amazon.com/cdk/" },
-    { name: "Google Cloud", url: "https://cloud.google.com" }
+    { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", insight: "The infinite computer.", url: "https://aws.amazon.com" },
+    { name: "Terraform", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg", insight: "Infrastructure as state.", url: "https://www.terraform.io" },
+    { name: "AWS CDK", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg", insight: "Code over YAML.", url: "https://aws.amazon.com/cdk/" },
+    { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg", insight: "Great networking.", url: "https://cloud.google.com" }
   ],
   "Containerization": [
-    { name: "Kubernetes", url: "https://kubernetes.io" },
-    { name: "Docker", url: "https://www.docker.com" },
-    { name: "Helm", url: "https://helm.sh" },
-    { name: "Ingress-Nginx", url: "https://github.com/kubernetes/ingress-nginx" }
+    { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg", insight: "The OS of the cloud.", url: "https://kubernetes.io" },
+    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg", insight: "Works on my machine.", url: "https://www.docker.com" },
+    { name: "Helm", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/helm/helm-original.svg", insight: "Package management.", url: "https://helm.sh" },
+    { name: "Nginx", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg", insight: "Traffic control.", url: "https://github.com/kubernetes/ingress-nginx" }
   ],
   "CI/CD & GitOps": [
-    { name: "ArgoCD", url: "https://argo-cd.readthedocs.io" },
-    { name: "Flux", url: "https://fluxcd.io" },
-    { name: "GitHub Actions", url: "https://github.com/features/actions" },
-    { name: "Jenkins", url: "https://www.jenkins.io" }
+    { name: "ArgoCD", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/argocd/argocd-original.svg", insight: "No drift allowed.", url: "https://argo-cd.readthedocs.io" },
+    { name: "Flux", icon: "https://cdn.simpleicons.org/flux/2980b9", insight: "GitOps minimal.", url: "https://fluxcd.io" },
+    { name: "GitHub Actions", icon: "https://cdn.simpleicons.org/githubactions/2088ff", insight: "CI where code lives.", url: "https://github.com/features/actions" },
+    { name: "Jenkins", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg", insight: "Old but gold.", url: "https://www.jenkins.io" }
   ],
   "Observability": [
-    { name: "Prometheus", url: "https://prometheus.io" },
-    { name: "Grafana", url: "https://grafana.com" },
-    { name: "ELK Stack", url: "https://www.elastic.co/elastic-stack" },
-    { name: "OpenTelemetry", url: "https://opentelemetry.io" }
+    { name: "Prometheus", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg", insight: "Metrics everywhere.", url: "https://prometheus.io" },
+    { name: "Grafana", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg", insight: "Pretty charts.", url: "https://grafana.com" },
+    { name: "ELK Stack", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg", insight: "Log everything.", url: "https://www.elastic.co/elastic-stack" },
+    { name: "OpenTelemetry", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opentelemetry/opentelemetry-original.svg", insight: "Standardized tracing.", url: "https://opentelemetry.io" }
   ],
   "Scripting & Backend": [
-    { name: "Go", url: "https://go.dev" },
-    { name: "Node.js", url: "https://nodejs.org" },
-    { name: "Bash", url: "https://www.gnu.org/software/bash/" },
-    { name: "Python", url: "https://www.python.org" }
+    { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg", insight: "Fast & simple.", url: "https://go.dev" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg", insight: "Async everywhere.", url: "https://nodejs.org" },
+    { name: "Bash", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg", insight: "The glue.", url: "https://www.gnu.org/software/bash/" },
+    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg", insight: "Versatile.", url: "https://www.python.org" }
   ]
 };
+
+// Flatten stack for the globe
+const allSkills = Object.values(stack).flat();
 ---
 
-<section id="stack" class="py-20">
-  <h2 class="text-3xl font-bold mb-12 flex items-center gap-4">
+<section id="stack" class="py-20 overflow-hidden relative">
+  <h2 class="text-3xl font-bold mb-12 flex items-center gap-4 relative z-10">
     <span class="text-accent-primary">02.</span> 
     Infrastructure Topology
     <span class="h-px bg-console-border flex-1 ml-4"></span>
   </h2>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {Object.entries(stack).map(([category, tools]) => (
-      <div class="border border-console-border rounded-lg p-6 bg-console-card/50 backdrop-blur-sm hover:border-accent-secondary/50 transition-colors duration-300">
-        <h3 class="text-lg font-mono text-accent-secondary mb-6 border-b border-console-border pb-2">
-          ./{category.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}
-        </h3>
-        <div class="flex flex-wrap gap-3">
-          {tools.map(tool => (
-            <a href={tool.url} target="_blank" rel="noopener noreferrer" class="group relative">
-              <div class="absolute -inset-0.5 bg-gradient-to-r from-accent-primary to-accent-secondary rounded opacity-0 group-hover:opacity-75 blur transition duration-200"></div>
-              <div class="relative px-4 py-2 bg-console-bg rounded border border-console-border flex items-center gap-2 hover:border-transparent transition-colors">
-                <span class="w-2 h-2 rounded-full bg-accent-success group-hover:animate-pulse"></span>
-                <span class="text-sm font-medium text-console-text group-hover:text-white transition-colors">{tool.name}</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </div>
-    ))}
+  <div class="relative w-full max-w-2xl mx-auto h-[600px] flex items-center justify-center perspective-1000">
+    <div id="globe-container" class="relative w-full h-full transform-style-3d z-10">
+      {allSkills.map((skill, index) => (
+        <a 
+          href={skill.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="skill-item absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center hover:scale-125 hover:z-50 transition-all duration-300 cursor-pointer group"
+          data-index={index}
+          data-total={allSkills.length}
+        >
+          <img 
+            src={skill.icon} 
+            alt={skill.name} 
+            class="w-16 h-16 object-contain filter drop-shadow-[0_0_2px_rgba(255,255,255,0.3)] group-hover:drop-shadow-[0_0_8px_rgba(0,240,255,0.8)] transition-all" 
+          />
+          
+          <span class="hidden group-hover:block text-[10px] font-normal opacity-0 group-hover:opacity-100 transition-opacity absolute -top-10 left-1/2 -translate-x-1/2 bg-black text-white px-3 py-1.5 rounded whitespace-nowrap pointer-events-none border border-console-border shadow-xl z-50">
+            {skill.insight}
+          </span>
+        </a>
+      ))}
+    </div>
   </div>
 </section>
+
+<style>
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+</style>
+
+<script>
+  const container = document.getElementById('globe-container');
+  const items = document.querySelectorAll('.skill-item');
+  
+  if (container && items.length > 0) {
+    const radius = 250; 
+    let rotationX = 0;
+    let rotationY = 0;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+    let isHovering = false;
+    let isVisible = false;
+    
+    // Fibonacci Sphere distribution
+    const phi = Math.PI * (3 - Math.sqrt(5));
+    
+    items.forEach((item, i) => {
+      const y = 1 - (i / (items.length - 1)) * 2;
+      const radiusAtY = Math.sqrt(1 - y * y);
+      const theta = phi * i;
+      
+      const x = Math.cos(theta) * radiusAtY;
+      const z = Math.sin(theta) * radiusAtY;
+      
+      // Store initial position
+      (item as HTMLElement).dataset.x = (x * radius).toString();
+      (item as HTMLElement).dataset.y = (y * radius).toString();
+      (item as HTMLElement).dataset.z = (z * radius).toString();
+      
+      // Add hover listeners
+      item.addEventListener('mouseenter', () => { isHovering = true; });
+      item.addEventListener('mouseleave', () => { isHovering = false; });
+    });
+    
+    // Container hover listener for global pause
+    container.addEventListener('mouseenter', () => { isHovering = true; });
+    container.addEventListener('mouseleave', () => { isHovering = false; });
+
+    // Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isVisible = entry.isIntersecting;
+      });
+    }, { threshold: 0.1 });
+    
+    observer.observe(container);
+
+    function animate() {
+      if (!isVisible) {
+        requestAnimationFrame(animate);
+        return;
+      }
+
+      // Rotation Logic
+      // Stop completely if hovering
+      // Reduced base speed from 0.002 to 0.001
+      const speed = isHovering ? 0 : 0.001;
+      targetRotationY += speed;
+      rotationY += (targetRotationY - rotationY) * 0.05;
+      rotationX += (targetRotationX - rotationX) * 0.05;
+      
+      const cosY = Math.cos(rotationY);
+      const sinY = Math.sin(rotationY);
+      const cosX = Math.cos(rotationX);
+      const sinX = Math.sin(rotationX);
+
+      items.forEach((item) => {
+        const el = item as HTMLElement;
+        const x = parseFloat(el.dataset.x || '0');
+        const y = parseFloat(el.dataset.y || '0');
+        const z = parseFloat(el.dataset.z || '0');
+
+        // Rotate around Y
+        const x1 = x * cosY - z * sinY;
+        const z1 = z * cosY + x * sinY;
+        
+        // Rotate around X
+        const y2 = y * cosX - z1 * sinX;
+        const z2 = z1 * cosX + y * sinX;
+        
+        // Apply transform to element
+        const scale = (z2 + radius * 2) / (radius * 3);
+        const opacity = (z2 + radius) / (radius * 2);
+        
+        el.style.transform = `translate(-50%, -50%) translate3d(${x1}px, ${y2}px, ${z2}px) scale(${scale})`;
+        el.style.opacity = Math.max(0.3, Math.min(1, opacity)).toString();
+        el.style.zIndex = Math.floor(z2).toString();
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Interactive rotation
+    document.addEventListener('mousemove', (e) => {
+      if (!isVisible || isHovering) return; // Disable mouse influence if hovering
+      
+      const mouseX = (e.clientX - window.innerWidth / 2) * 0.0001;
+      const mouseY = (e.clientY - window.innerHeight / 2) * 0.0001;
+      
+      targetRotationY += mouseX;
+      targetRotationX -= mouseY;
+    });
+  }
+</script>

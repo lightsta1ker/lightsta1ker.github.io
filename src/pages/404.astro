@@ -1,0 +1,58 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout title="404: Incident Report">
+  <div class="min-h-[60vh] flex flex-col items-center justify-center font-mono">
+    <div class="w-full max-w-2xl border border-accent-error/50 bg-console-card/50 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(255,0,85,0.1)]">
+      <div class="bg-accent-error/10 px-4 py-2 border-b border-accent-error/20 flex items-center justify-between">
+        <div class="flex items-center gap-2 text-accent-error">
+          <span class="w-2 h-2 rounded-full bg-accent-error animate-pulse"></span>
+          <span class="font-bold">INCIDENT #404</span>
+        </div>
+        <div class="text-xs text-console-muted">SEVERITY: HIGH</div>
+      </div>
+      
+      <div class="p-8 space-y-6">
+        <div class="space-y-2">
+          <div class="text-xs text-console-muted uppercase tracking-wider">Timestamp</div>
+          <div class="text-console-text" id="timestamp">2025-12-22T10:55:28Z</div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-xs text-console-muted uppercase tracking-wider">Error Message</div>
+          <div class="text-accent-error font-bold text-xl">ResourceNotFoundException</div>
+          <p class="text-sm text-console-muted">
+            The requested resource could not be located in the current availability zone.
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <div class="text-xs text-console-muted uppercase tracking-wider">Stack Trace</div>
+          <pre class="bg-console-bg p-4 rounded text-xs text-console-muted overflow-x-auto">
+at RouteHandler.handle (/src/pages/[...slug].astro:42:12)
+at async RenderPipeline.process (/core/pipeline.ts:105:5)
+at System.fail (core/system.ts:500:500)
+<span class="text-accent-error">Caused by: UserNavigationError: Path does not exist</span>
+          </pre>
+        </div>
+
+        <div class="pt-6 border-t border-console-border">
+          <div class="text-xs text-console-muted uppercase tracking-wider mb-4">Recommended Actions</div>
+          <div class="flex gap-4">
+            <a href="/" class="px-4 py-2 bg-accent-primary text-black text-sm font-bold rounded hover:bg-accent-primary/90 transition-colors">
+              Initiate Rollback (Home)
+            </a>
+            <a href="javascript:history.back()" class="px-4 py-2 border border-console-border text-console-text text-sm rounded hover:border-accent-primary transition-colors">
+              Retry Request (Back)
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('timestamp')!.innerText = new Date().toISOString();
+  </script>
+</MainLayout>
