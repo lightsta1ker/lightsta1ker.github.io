@@ -12,11 +12,11 @@ export default {
 		extend: {
       colors: {
         console: {
-          bg: '#0a0a0a',
-          card: '#111111',
-          border: '#333333',
-          text: '#e5e5e5',
-          muted: '#a3a3a3',
+          bg: 'var(--bg-console)',
+          card: 'var(--bg-card)',
+          border: 'var(--border-console)',
+          text: 'var(--text-console)',
+          muted: 'var(--text-muted)',
         },
         accent: {
           primary: '#00f0ff', // Cyber blue

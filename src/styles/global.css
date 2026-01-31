@@ -3,12 +3,30 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Light Mode (Default) */
+    --bg-console: #ffffff;
+    --bg-card: #f3f4f6;
+    --border-console: #e5e7eb;
+    --text-console: #111827;
+    --text-muted: #6b7280;
+  }
+
+  .dark {
+    /* Dark Mode */
+    --bg-console: #0a0a0a;
+    --bg-card: #111111;
+    --border-console: #333333;
+    --text-console: #e5e5e5;
+    --text-muted: #a3a3a3;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply antialiased;
+    @apply antialiased transition-colors duration-300;
   }
 }
 
@@ -97,5 +115,15 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Hide scrollbar for code blocks */
+  pre::-webkit-scrollbar {
+    display: none;
+  }
+
+  pre {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
